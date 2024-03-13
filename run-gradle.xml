@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     03/2024
+
+     run-gradle
+
+     E. Amblard
+     ====================================================================== -->
+<project name="run-gradle" default="init-props">
+	<description>
+	        Run Gradle Tasks for Eclipse
+	</description>
+
+	
+    <!-- ================================= 
+          Paramètres généraux
+         ================================= -->
+
+	<property name="path.dir.lib" location="../~lib"/>
+	
+	<path id="classpath.grdle.wrapper" path="${path.dir.lib}/gradle-wrapper/gradle-wrapper.jar" />
+	
+	<condition property="param.gradle.data" 
+		value='--gradle-user-home "C:/TEMP/gradle-data"' 
+		else=""
+	>
+		<os family="windows" />
+	</condition>
+	
+	<condition property="flag.init" >
+		<and>
+			<available file="src/META-INF/default/jdbc.properties" />
+			<not>
+				<available file="src/META-INF/jdbc.properties" />
+			</not>
+		</and>
+	</condition>
+	
+
+	<!-- ================================= 
+	      target: eclipse              
+	     ================================= -->
+	<target name="eclipse" description="Configure Eclipse project">
+		<gradle task="cleanEclipse" />
+		<gradle task="eclipse" />
+	</target>
+
+
+	<!-- ================================= 
+	      target: init-props              
+	     ================================= -->
+	<target name="init-props" depends="eclipse"  if="flag.init" description="Copy properies file">
+		<copy todir="src/META-INF"  >
+			<fileset dir="src/META-INF/default" />
+		</copy>
+	</target>
+	
+
+	<!-- ================================= 
+	      target: run.appli              
+	     ================================= -->
+	<target name="run.appli" description="Run the app">
+		<gradle task="run" />
+	</target>
+	
+	
+	<!-- ================================= 
+	      macrodef gradle              
+	     ================================= -->
+	<macrodef name="gradle">
+		<attribute name="task" />
+		<sequential>
+	    	<java fork="true" 
+	    		classname="org.gradle.wrapper.GradleWrapperMain" 
+	    		classpathref="classpath.grdle.wrapper"
+	    	>
+	    		<arg value="@{task}" />
+	    		<arg line="${param.gradle.data}"/>
+	    		<arg value="--no-daemon"/>
+	    		<jvmarg value="-Xmx64m"/>
+	    		<jvmarg value="-Xms64m"/>
+	    	</java>
+		</sequential>
+	</macrodef>
+	
+
+</project>
