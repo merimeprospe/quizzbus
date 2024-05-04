@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quizzbus.view.systeme.ViewLogin">
+   <top>
+      <AnchorPane prefHeight="394.0" prefWidth="623.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="394.0" fitWidth="647.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Image/img.jpg" />
+               </image>
+            </ImageView>
+            <AnchorPane layoutX="289.0" layoutY="12.0" prefHeight="369.0" prefWidth="327.0" style="-fx-background-color: #005169;">
+               <children>
+                  <Label layoutX="95.0" layoutY="32.0" text="Identifiez-vous" textFill="#ea6826">
+                     <font>
+                        <Font name="Century Gothic" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txfPseudo" layoutX="89.0" layoutY="123.0" promptText="login" />
+                  <PasswordField fx:id="pwfMotDePasse" layoutX="89.0" layoutY="192.0" promptText="password" />
+                  <Button layoutX="115.0" layoutY="269.0" mnemonicParsing="false" onAction="#doConnexion" prefHeight="28.0" prefWidth="97.0" style="-fx-background-color: #ea6826;" text="Valider" textFill="WHITE">
+                     <font>
+                        <Font name="Century Gothic" size="15.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="42.28" offsetX="9.0" radius="24.564999999999998" width="57.98">
+                           <color>
+                              <Color red="0.9176470637321472" green="0.40784314274787903" blue="0.14901961386203766" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Button>
+                  <Label layoutX="100.0" layoutY="328.0" prefHeight="19.0" prefWidth="141.0" text="Mot de passe oublier ?" textFill="WHITE" underline="true">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <Label layoutX="10.0" layoutY="152.0" text="Bienvenue chez SABV" textFill="#e0eaff">
+               <font>
+                  <Font name="Century Gothic Bold" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="11.0" layoutY="197.0" prefHeight="31.0" prefWidth="143.0" text="Pas de droit" textFill="#e0eaff">
+               <font>
+                  <Font name="Century Gothic Bold Italic" size="24.0" />
+               </font>
+            </Label>
+            <Button layoutX="170.0" layoutY="196.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" style="-fx-background-color: #ea6826;" text="call" textFill="WHITE">
+               <font>
+                  <Font name="Century Gothic" size="15.0" />
+               </font>
+               <effect>
+                  <DropShadow height="42.28" offsetX="9.0" radius="24.564999999999998" width="57.98">
+                     <color>
+                        <Color red="0.9176470637321472" green="0.40784314274787903" blue="0.14901961386203766" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Button>
+         </children>
+      </AnchorPane>
+   </top>
+</BorderPane>

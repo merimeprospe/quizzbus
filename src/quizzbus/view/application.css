@@ -1,8 +1,8 @@
 
-.root{
+/*.root{
 	-fx-base:  #aed6f1 ;
 	-fx-background: #eaf2f8;
-}
+} */
 
 .text-field, .text-area, .list-view, .table-view  {
 	-fx-base: white;

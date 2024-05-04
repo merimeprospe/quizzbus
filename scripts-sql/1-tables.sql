@@ -16,3 +16,139 @@ CREATE TABLE compte (
 	UNIQUE (pseudo),
 	PRIMARY KEY (idcompte)
 );
+
+CREATE TABLE seance(
+   id INT,
+   DateJour DATE NOT NULL,
+   lieu VARCHAR(50) NOT NULL,
+   type VARCHAR(50) NOT NULL,
+   PRIMARY KEY(id),
+   UNIQUE(DateJour)
+);
+
+CREATE TABLE theme(
+   id_theme INT,
+   nom VARCHAR(50) NOT NULL,
+   desc_theme VARCHAR(100),
+   PRIMARY KEY(id_theme),
+   UNIQUE(nom)
+);
+
+CREATE TABLE niveaux(
+   id_niveaux INT,
+   description VARCHAR(50),
+   PRIMARY KEY(id_niveaux)
+);
+
+CREATE TABLE quizz(
+   id_quizz INT,
+   desc_quizz VARCHAR(100) NOT NULL,
+   id_niveaux INT NOT NULL,
+   id_theme INT NOT NULL,
+   PRIMARY KEY(id_quizz),
+   FOREIGN KEY(id_niveaux) REFERENCES niveaux(id_niveaux),
+   FOREIGN KEY(id_theme) REFERENCES theme(id_theme)
+);
+
+CREATE TABLE question(
+   id_question INT,
+   question VARCHAR(90) NOT NULL,
+   desc_question VARCHAR(83),
+   solution VARCHAR(50),
+   réponse_1 VARCHAR(50),
+   réponse_2 VARCHAR(50),
+   réponse_3 VARCHAR(50),
+   réponse_4 VARCHAR(50),
+   PRIMARY KEY(id_question)
+);
+
+CREATE TABLE media(
+   id_media INT,
+   desc_media VARCHAR(63),
+   chemin VARCHAR(50),
+   PRIMARY KEY(id_media)
+);
+
+CREATE TABLE users(
+   id_user INT,
+   nom VARCHAR(50),
+   login VARCHAR(50),
+   password VARCHAR(50),
+   PRIMARY KEY(id_user)
+);
+
+CREATE TABLE role(
+   id_role INT,
+   nom VARCHAR(50),
+   desc_role VARCHAR(50),
+   PRIMARY KEY(id_role)
+);
+
+CREATE TABLE poste(
+   id_poste INT,
+   PRIMARY KEY(id_poste)
+);
+
+CREATE TABLE reponse(
+   id INT,
+   valeur VARCHAR(50) NOT NULL,
+   id_question INT NOT NULL,
+   PRIMARY KEY(id),
+   FOREIGN KEY(id_question) REFERENCES question(id_question)
+);
+
+CREATE TABLE partie(
+   id_partie INT,
+   date_heure timestamp NOT NULL,
+   score INT,
+   type_partie VARCHAR(50),
+   id INT NOT NULL,
+   id_poste INT NOT NULL,
+   id_user INT NOT NULL,
+   PRIMARY KEY(id_partie),
+   FOREIGN KEY(id) REFERENCES seance(id),
+   FOREIGN KEY(id_poste) REFERENCES poste(id_poste),
+   FOREIGN KEY(id_user) REFERENCES users(id_user)
+);
+
+CREATE TABLE avoir(
+   id INT,
+   id_theme INT,
+   id_poste INT,
+   PRIMARY KEY(id, id_theme, id_poste),
+   FOREIGN KEY(id) REFERENCES seance(id),
+   FOREIGN KEY(id_theme) REFERENCES theme(id_theme),
+   FOREIGN KEY(id_poste) REFERENCES poste(id_poste)
+);
+
+CREATE TABLE contenir(
+   id_quizz INT,
+   id_question INT,
+   PRIMARY KEY(id_quizz, id_question),
+   FOREIGN KEY(id_quizz) REFERENCES quizz(id_quizz),
+   FOREIGN KEY(id_question) REFERENCES question(id_question)
+);
+
+CREATE TABLE affecter(
+   id_question INT,
+   id_media INT,
+   PRIMARY KEY(id_question, id_media),
+   FOREIGN KEY(id_question) REFERENCES question(id_question),
+   FOREIGN KEY(id_media) REFERENCES media(id_media)
+);
+
+CREATE TABLE posséder(
+   id_user INT,
+   id_role INT,
+   PRIMARY KEY(id_user, id_role),
+   FOREIGN KEY(id_user) REFERENCES users(id_user),
+   FOREIGN KEY(id_role) REFERENCES role(id_role)
+);
+
+CREATE TABLE contribuer(
+   id_quizz INT,
+   id_partie INT,
+   PRIMARY KEY(id_quizz, id_partie),
+   FOREIGN KEY(id_quizz) REFERENCES quizz(id_quizz),
+   FOREIGN KEY(id_partie) REFERENCES partie(id_partie)
+);

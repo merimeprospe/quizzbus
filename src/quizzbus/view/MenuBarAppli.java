@@ -11,6 +11,7 @@ import jfox.javafx.control.MenuBarAbstract;
 import quizzbus.report.ManagerReport;
 import quizzbus.view.compte.ViewCompteCombo;
 import quizzbus.view.compte.ViewCompteList;
+import quizzbus.view.systeme.ViewLogin;
 import quizzbus.view.systeme.ModelConnexion;
 import quizzbus.view.systeme.ViewAbout;
 import quizzbus.view.systeme.ViewConnexion;
@@ -55,7 +56,7 @@ public class MenuBarAppli extends MenuBarAbstract {
 		menu = addMenu( "Système" );
 
 		addMenuItem( "Se déconnecter", menu, flagConnexion,
-				e -> managerGui.showView( ViewConnexion.class ) );
+				e -> managerGui.showView( ViewLogin.class ) );
 
 		addMenuItem( "Quitter", menu, 
 				e -> managerGui.exit() );
